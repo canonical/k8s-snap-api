@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/canonical/k8s-snap-api/internal/util"
+	"github.com/canonical/k8s-snap-api-v1/internal/util"
 )
 
 // BootstrapConfig is used to seed cluster configuration when bootstrapping a new cluster.

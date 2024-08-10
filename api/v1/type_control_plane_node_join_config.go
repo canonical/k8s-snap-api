@@ -3,7 +3,7 @@ package apiv1
 import (
 	"fmt"
 
-	"github.com/canonical/k8s-snap-api/internal/util"
+	"github.com/canonical/k8s-snap-api-v1/internal/util"
 	"gopkg.in/yaml.v2"
 )
 
@@ -74,7 +74,6 @@ func (c *ControlPlaneNodeJoinConfig) GetKubeletClientCert() string {
 func (c *ControlPlaneNodeJoinConfig) GetKubeletClientKey() string {
 	return util.Deref(c.KubeletClientKey)
 }
-
 
 // WorkerJoinConfigFromMicrocluster parses a microcluster map[string]string and retrieves the WorkerNodeJoinConfig.
 func ControlPlaneJoinConfigFromMicrocluster(m map[string]string) (ControlPlaneNodeJoinConfig, error) {
