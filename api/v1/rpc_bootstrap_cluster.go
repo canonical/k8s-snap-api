@@ -14,4 +14,4 @@ type BootstrapClusterRequest struct {
 }
 
 // BootstrapClusterResponse is the response message for the BootstrapClusterRPC.
-type BootstrapClusterResponse struct{}
+type BootstrapClusterResponse NodeStatus
