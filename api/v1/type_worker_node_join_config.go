@@ -1,6 +1,6 @@
 package apiv1
 
-import "github.com/canonical/k8s-snap-api-v1/internal/util"
+import "github.com/canonical/k8s-snap-api/internal/util"
 
 type WorkerJoinConfig struct {
 	KubeletCert         *string `json:"kubelet-crt,omitempty" yaml:"kubelet-crt,omitempty"`

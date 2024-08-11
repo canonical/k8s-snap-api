@@ -1,4 +1,4 @@
-module github.com/canonical/k8s-snap-api-v1
+module github.com/canonical/k8s-snap-api
 
 go 1.22.6
 

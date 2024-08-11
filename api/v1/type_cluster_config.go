@@ -3,7 +3,7 @@ package apiv1
 import (
 	"fmt"
 
-	"github.com/canonical/k8s-snap-api-v1/internal/util"
+	"github.com/canonical/k8s-snap-api/internal/util"
 	"gopkg.in/yaml.v2"
 )
 

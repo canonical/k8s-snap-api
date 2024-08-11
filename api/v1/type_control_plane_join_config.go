@@ -1,7 +1,7 @@
 package apiv1
 
 import (
-	"github.com/canonical/k8s-snap-api-v1/internal/util"
+	"github.com/canonical/k8s-snap-api/internal/util"
 )
 
 type ControlPlaneJoinConfig struct {
