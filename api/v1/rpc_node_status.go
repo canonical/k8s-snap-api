@@ -1,7 +1,7 @@
 package apiv1
 
 // NodeStatusRPC is the path for the NodeStatus RPC.
-const NodeStatusRPC = "k8sd/cluster"
+const NodeStatusRPC = "k8sd/node"
 
 // NodeStatusRequest is the request message for the NodeStatus RPC.
 type NodeStatusRequest struct{}
