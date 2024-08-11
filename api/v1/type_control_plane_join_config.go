@@ -1,13 +1,10 @@
 package apiv1
 
 import (
-	"fmt"
-
 	"github.com/canonical/k8s-snap-api-v1/internal/util"
-	"gopkg.in/yaml.v2"
 )
 
-type ControlPlaneNodeJoinConfig struct {
+type ControlPlaneJoinConfig struct {
 	ExtraSANS []string `json:"extra-sans,omitempty" yaml:"extra-sans,omitempty"`
 
 	// Seed certificates for external CA
@@ -40,46 +37,37 @@ type ControlPlaneNodeJoinConfig struct {
 	ExtraNodeK8sDqliteArgs             map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 }
 
-func (c *ControlPlaneNodeJoinConfig) GetFrontProxyClientCert() string {
+func (c *ControlPlaneJoinConfig) GetFrontProxyClientCert() string {
 	return util.Deref(c.FrontProxyClientCert)
 }
-func (c *ControlPlaneNodeJoinConfig) GetFrontProxyClientKey() string {
+func (c *ControlPlaneJoinConfig) GetFrontProxyClientKey() string {
 	return util.Deref(c.FrontProxyClientKey)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeProxyClientCert() string {
+func (b *ControlPlaneJoinConfig) GetKubeProxyClientCert() string {
 	return util.Deref(b.KubeProxyClientCert)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeProxyClientKey() string {
+func (b *ControlPlaneJoinConfig) GetKubeProxyClientKey() string {
 	return util.Deref(b.KubeProxyClientKey)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeSchedulerClientCert() string {
+func (b *ControlPlaneJoinConfig) GetKubeSchedulerClientCert() string {
 	return util.Deref(b.KubeSchedulerClientCert)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeSchedulerClientKey() string {
+func (b *ControlPlaneJoinConfig) GetKubeSchedulerClientKey() string {
 	return util.Deref(b.KubeSchedulerClientKey)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeControllerManagerClientCert() string {
+func (b *ControlPlaneJoinConfig) GetKubeControllerManagerClientCert() string {
 	return util.Deref(b.KubeControllerManagerClientCert)
 }
-func (b *ControlPlaneNodeJoinConfig) GetKubeControllerManagerClientKey() string {
+func (b *ControlPlaneJoinConfig) GetKubeControllerManagerClientKey() string {
 	return util.Deref(b.KubeControllerManagerClientKey)
 }
-func (c *ControlPlaneNodeJoinConfig) GetAPIServerCert() string { return util.Deref(c.APIServerCert) }
-func (c *ControlPlaneNodeJoinConfig) GetAPIServerKey() string  { return util.Deref(c.APIServerKey) }
-func (c *ControlPlaneNodeJoinConfig) GetKubeletCert() string   { return util.Deref(c.KubeletCert) }
-func (c *ControlPlaneNodeJoinConfig) GetKubeletKey() string    { return util.Deref(c.KubeletKey) }
-func (c *ControlPlaneNodeJoinConfig) GetKubeletClientCert() string {
+func (c *ControlPlaneJoinConfig) GetAPIServerCert() string { return util.Deref(c.APIServerCert) }
+func (c *ControlPlaneJoinConfig) GetAPIServerKey() string  { return util.Deref(c.APIServerKey) }
+func (c *ControlPlaneJoinConfig) GetKubeletCert() string   { return util.Deref(c.KubeletCert) }
+func (c *ControlPlaneJoinConfig) GetKubeletKey() string    { return util.Deref(c.KubeletKey) }
+func (c *ControlPlaneJoinConfig) GetKubeletClientCert() string {
 	return util.Deref(c.KubeletClientCert)
 }
-func (c *ControlPlaneNodeJoinConfig) GetKubeletClientKey() string {
+func (c *ControlPlaneJoinConfig) GetKubeletClientKey() string {
 	return util.Deref(c.KubeletClientKey)
-}
-
-// WorkerJoinConfigFromMicrocluster parses a microcluster map[string]string and retrieves the WorkerNodeJoinConfig.
-func ControlPlaneJoinConfigFromMicrocluster(m map[string]string) (ControlPlaneNodeJoinConfig, error) {
-	config := ControlPlaneNodeJoinConfig{}
-	if err := yaml.UnmarshalStrict([]byte(m["controlPlaneJoinConfig"]), &config); err != nil {
-		return ControlPlaneNodeJoinConfig{}, fmt.Errorf("failed to unmarshal control plane join config: %w", err)
-	}
-	return config, nil
 }

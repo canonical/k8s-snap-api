@@ -1,13 +1,8 @@
 package apiv1
 
-import (
-	"fmt"
+import "github.com/canonical/k8s-snap-api-v1/internal/util"
 
-	"github.com/canonical/k8s-snap-api-v1/internal/util"
-	"gopkg.in/yaml.v2"
-)
-
-type WorkerNodeJoinConfig struct {
+type WorkerJoinConfig struct {
 	KubeletCert         *string `json:"kubelet-crt,omitempty" yaml:"kubelet-crt,omitempty"`
 	KubeletKey          *string `json:"kubelet-key,omitempty" yaml:"kubelet-key,omitempty"`
 	KubeletClientCert   *string `json:"kubelet-client-crt,omitempty" yaml:"kubelet-client-crt,omitempty"`
@@ -25,22 +20,13 @@ type WorkerNodeJoinConfig struct {
 	ExtraNodeK8sAPIServerProxyArgs map[string]*string `json:"extra-node-k8s-apiserver-proxy-args,omitempty" yaml:"extra-node-k8s-apiserver-proxy-args,omitempty"`
 }
 
-func (w *WorkerNodeJoinConfig) GetKubeletCert() string       { return util.Deref(w.KubeletCert) }
-func (w *WorkerNodeJoinConfig) GetKubeletKey() string        { return util.Deref(w.KubeletKey) }
-func (w *WorkerNodeJoinConfig) GetKubeletClientCert() string { return util.Deref(w.KubeletClientCert) }
-func (w *WorkerNodeJoinConfig) GetKubeletClientKey() string  { return util.Deref(w.KubeletClientKey) }
-func (w *WorkerNodeJoinConfig) GetKubeProxyClientCert() string {
+func (w *WorkerJoinConfig) GetKubeletCert() string       { return util.Deref(w.KubeletCert) }
+func (w *WorkerJoinConfig) GetKubeletKey() string        { return util.Deref(w.KubeletKey) }
+func (w *WorkerJoinConfig) GetKubeletClientCert() string { return util.Deref(w.KubeletClientCert) }
+func (w *WorkerJoinConfig) GetKubeletClientKey() string  { return util.Deref(w.KubeletClientKey) }
+func (w *WorkerJoinConfig) GetKubeProxyClientCert() string {
 	return util.Deref(w.KubeProxyClientCert)
 }
-func (w *WorkerNodeJoinConfig) GetKubeProxyClientKey() string {
+func (w *WorkerJoinConfig) GetKubeProxyClientKey() string {
 	return util.Deref(w.KubeProxyClientKey)
-}
-
-// WorkerJoinConfigFromMicrocluster parses a microcluster map[string]string and retrieves the WorkerNodeJoinConfig.
-func WorkerJoinConfigFromMicrocluster(m map[string]string) (WorkerNodeJoinConfig, error) {
-	config := WorkerNodeJoinConfig{}
-	if err := yaml.UnmarshalStrict([]byte(m["workerJoinConfig"]), &config); err != nil {
-		return WorkerNodeJoinConfig{}, fmt.Errorf("failed to unmarshal worker join config: %w", err)
-	}
-	return config, nil
 }

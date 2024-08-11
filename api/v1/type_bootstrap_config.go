@@ -1,11 +1,6 @@
 package apiv1
 
-import (
-	"encoding/json"
-	"fmt"
-
-	"github.com/canonical/k8s-snap-api-v1/internal/util"
-)
+import "github.com/canonical/k8s-snap-api-v1/internal/util"
 
 // BootstrapConfig is used to seed cluster configuration when bootstrapping a new cluster.
 type BootstrapConfig struct {
@@ -112,24 +107,3 @@ func (b *BootstrapConfig) GetKubeletCert() string       { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.KubeletKey) }
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
-
-// ToMicrocluster converts a BootstrapConfig to a map[string]string for use in microcluster.
-func (b *BootstrapConfig) ToMicrocluster() (map[string]string, error) {
-	config, err := json.Marshal(b)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal bootstrap config: %w", err)
-	}
-
-	return map[string]string{
-		"bootstrapConfig": string(config),
-	}, nil
-}
-
-// BootstrapConfigFromMicrocluster parses a microcluster map[string]string and retrieves the BootstrapConfig.
-func BootstrapConfigFromMicrocluster(m map[string]string) (BootstrapConfig, error) {
-	config := BootstrapConfig{}
-	if err := json.Unmarshal([]byte(m["bootstrapConfig"]), &config); err != nil {
-		return BootstrapConfig{}, fmt.Errorf("failed to unmarshal bootstrap config: %w", err)
-	}
-	return config, nil
-}
