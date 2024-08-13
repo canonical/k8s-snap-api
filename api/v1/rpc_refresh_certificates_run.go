@@ -9,6 +9,8 @@ type RefreshCertificatesRunRequest struct {
 	Seed int `json:"seed"`
 	// ExpirationSeconds is the desired duration of the new certificates.
 	ExpirationSeconds int `json:"expiration-seconds"`
+	// ExtraSANs is a list of extra SANs (DNS names or IP addresses) to add to the kube-apiserver certificates.
+	ExtraSANs []string `json:"extra-sans"`
 }
 
 // RefreshCertificatesRunResponse is the response message for the RefreshCertificatesRun RPC.
