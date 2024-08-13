@@ -10,6 +10,7 @@ type RefreshCertificatesRunRequest struct {
 	// ExpirationSeconds is the desired duration of the new certificates.
 	ExpirationSeconds int `json:"expiration-seconds"`
 	// ExtraSANs is a list of extra SANs (DNS names or IP addresses) to add to the kube-apiserver certificates.
+	// ExtraSANs is ignored for worker nodes.
 	ExtraSANs []string `json:"extra-sans"`
 }
 
