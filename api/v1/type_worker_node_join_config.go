@@ -18,6 +18,9 @@ type WorkerJoinConfig struct {
 	ExtraNodeKubeletArgs           map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
 	ExtraNodeContainerdArgs        map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
 	ExtraNodeK8sAPIServerProxyArgs map[string]*string `json:"extra-node-k8s-apiserver-proxy-args,omitempty" yaml:"extra-node-k8s-apiserver-proxy-args,omitempty"`
+
+	// Extra configuration for the containerd config.toml
+	ExtraNodeContainerdConfig map[string]any `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
 }
 
 func (w *WorkerJoinConfig) GetKubeletCert() string       { return util.Deref(w.KubeletCert) }
