@@ -35,6 +35,9 @@ type ControlPlaneJoinConfig struct {
 	ExtraNodeKubeletArgs               map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
 	ExtraNodeContainerdArgs            map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
 	ExtraNodeK8sDqliteArgs             map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
+
+	// Extra configuration for the containerd config.toml
+	ExtraNodeContainerdConfig map[string]any `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
 }
 
 func (c *ControlPlaneJoinConfig) GetFrontProxyClientCert() string {
