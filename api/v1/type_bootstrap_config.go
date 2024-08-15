@@ -65,7 +65,7 @@ type BootstrapConfig struct {
 	ExtraNodeK8sDqliteArgs             map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml
-	ExtraNodeContainerdConfig map[string]any `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
+	ExtraNodeContainerdConfig MapStringAny `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
 }
 
 func (b *BootstrapConfig) GetDatastoreType() string        { return util.Deref(b.DatastoreType) }
