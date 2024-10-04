@@ -155,6 +155,8 @@ type GatewayConfig struct {
 func (c GatewayConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
 
 type MetricsServerConfig struct {
+	// Determines if the feature should be enabled.
+	// If omitted defaults to `true`.
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 }
 
@@ -163,9 +165,13 @@ func (c MetricsServerConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
 type UserFacingDatastoreConfig struct {
 	// Type of the datastore. Needs to be "external".
 	Type       *string   `json:"type,omitempty" yaml:"type,omitempty"`
+	// Datastore server addresses.
 	Servers    *[]string `json:"servers,omitempty" yaml:"servers,omitempty"`
+	// Datastore CA certificate.
 	CACert     *string   `json:"ca-crt,omitempty" yaml:"ca-crt,omitempty"`
+	// Datastore client certificate.
 	ClientCert *string   `json:"client-crt,omitempty" yaml:"client-crt,omitempty"`
+	// Datastore client key.
 	ClientKey  *string   `json:"client-key,omitempty" yaml:"client-key,omitempty"`
 }
 

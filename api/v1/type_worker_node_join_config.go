@@ -9,9 +9,17 @@ type WorkerJoinConfig struct {
 	// The key to be used for the kubelet.
 	// If omitted defaults to an auto generated key.
 	KubeletKey          *string `json:"kubelet-key,omitempty" yaml:"kubelet-key,omitempty"`
+	// The client certificate to be used for the kubelet.
+	// If omitted defaults to an auto generated certificate.
 	KubeletClientCert   *string `json:"kubelet-client-crt,omitempty" yaml:"kubelet-client-crt,omitempty"`
+	// The client key to be used for the kubelet.
+	// If omitted defaults to an auto generated key.
 	KubeletClientKey    *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
+	// The client certificate to be used for the kube-proxy.
+	// If omitted defaults to an auto generated certificate.
 	KubeProxyClientCert *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
+	// The client key to be used for the kube-proxy.
+	// If omitted defaults to an auto generated key.
 	KubeProxyClientKey  *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
 
 	// Additional files that are uploaded `/var/snap/k8s/common/args/conf.d/<filename>`
