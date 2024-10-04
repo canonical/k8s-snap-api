@@ -29,6 +29,8 @@ type UserFacingClusterConfig struct {
 	//
 	// Possible values: `external`.
 	CloudProvider *string             `json:"cloud-provider,omitempty" yaml:"cloud-provider,omitempty"`
+	// Annotations is a map of strings that can be used to store arbitrary metadata configuration.
+	// Please refer to the ClusterAPI annotations reference for further details on these options.
 	Annotations   map[string]string   `json:"annotations,omitempty" yaml:"annotations,omitempty"`
 }
 

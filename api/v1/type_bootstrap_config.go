@@ -57,7 +57,11 @@ type BootstrapConfig struct {
 	// The CA key to be used for Kubernetes services.
 	// If omitted defaults to an auto generated key.
 	CAKey                           *string `json:"ca-key,omitempty" yaml:"ca-key,omitempty"`
+	// The client CA certificate to be used for Kubernetes services.
+	// If omitted defaults to an auto generated certificate.
 	ClientCACert                    *string `json:"client-ca-crt,omitempty" yaml:"client-ca-crt,omitempty"`
+	// The client CA key to be used for Kubernetes services.
+	// If omitted defaults to an auto generated key.
 	ClientCAKey                     *string `json:"client-ca-key,omitempty" yaml:"client-ca-key,omitempty"`
 	// The CA certificate to be used for the front proxy.
 	// If omitted defaults to an auto generated certificate.
@@ -77,13 +81,30 @@ type BootstrapConfig struct {
 	// The client key to be used by kubelet for communicating with the kube-apiserver.
 	// If omitted defaults to an auto generated key.
 	APIServerKubeletClientKey       *string `json:"apiserver-kubelet-client-key,omitempty" yaml:"apiserver-kubelet-client-key,omitempty"`
+
+	// The admin client certificate to be used for Kubernetes services.
+	// If omitted defaults to an auto generated certificate.
 	AdminClientCert                 *string `json:"admin-client-crt,omitempty" yaml:"admin-client-crt,omitempty"`
+	// The admin client key to be used for Kubernetes services.
+	// If omitted defaults to an auto generated key.
 	AdminClientKey                  *string `json:"admin-client-key,omitempty" yaml:"admin-client-key,omitempty"`
+	// The client certificate to be used for the kube-proxy.
+	// If omitted defaults to an auto generated certificate.
 	KubeProxyClientCert             *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
+	// The client key to be used for the kube-proxy.
+	// If omitted defaults to an auto generated key.
 	KubeProxyClientKey              *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
+	// The client certificate to be used for the kube-scheduler.
+	// If omitted defaults to an auto generated certificate.
 	KubeSchedulerClientCert         *string `json:"kube-scheduler-client-crt,omitempty" yaml:"kube-scheduler-client-crt,omitempty"`
+	// The client key to be used for the kube-scheduler.
+	// If omitted defaults to an auto generated key.
 	KubeSchedulerClientKey          *string `json:"kube-scheduler-client-key,omitempty" yaml:"kube-scheduler-client-key,omitempty"`
+	// The client certificate to be used for the Kubernetes controller manager.
+	// If omitted defaults to an auto generated certificate.
 	KubeControllerManagerClientCert *string `json:"kube-controller-manager-client-crt,omitempty" yaml:"kube-controller-manager-client-crt,omitempty"`
+	// The client key to be used for the Kubernetes controller manager.
+	// If omitted defaults to an auto generated key.
 	KubeControllerManagerClientKey  *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-ControllerManager-client-key,omitempty"`
 	// The key to be used by the default service account.
 	// If omitted defaults to an auto generated key.
@@ -103,7 +124,11 @@ type BootstrapConfig struct {
 	// The key to be used for the kubelet.
 	// If omitted defaults to an auto generated key.
 	KubeletKey        *string `json:"kubelet-key,omitempty" yaml:"kubelet-key,omitempty"`
+	// The certificate to be used for the kubelet client.
+	// If omitted defaults to an auto generated certificate.
 	KubeletClientCert *string `json:"kubelet-client-crt,omitempty" yaml:"kubelet-client-crt,omitempty"`
+	// The key to be used for the kubelet client.
+	// If omitted defaults to an auto generated key.
 	KubeletClientKey  *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
 
 	// Additional files that are uploaded `/var/snap/k8s/common/args/conf.d/<filename>`
@@ -115,33 +140,33 @@ type BootstrapConfig struct {
 
 	// Extra args to add to individual services (set any arg to null to delete).
 
-	// Additional arguments that are passed to the `kube-apiserver` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kube-apiserver` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeAPIServerArgs         map[string]*string `json:"extra-node-kube-apiserver-args,omitempty" yaml:"extra-node-kube-apiserver-args,omitempty"`
-	// Additional arguments that are passed to the `kube-controller-manager` only for
-	// that specific node. Overwrites default configuration. A parameter that is
-	// explicitly set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kube-controller-manager` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeControllerManagerArgs map[string]*string `json:"extra-node-kube-controller-manager-args,omitempty" yaml:"extra-node-kube-controller-manager-args,omitempty"`
-	// Additional arguments that are passed to the `kube-scheduler` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kube-scheduler` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeSchedulerArgs         map[string]*string `json:"extra-node-kube-scheduler-args,omitempty" yaml:"extra-node-kube-scheduler-args,omitempty"`
-	// Additional arguments that are passed to the `kube-proxy` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kube-proxy` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeProxyArgs             map[string]*string `json:"extra-node-kube-proxy-args,omitempty" yaml:"extra-node-kube-proxy-args,omitempty"`
-	// Additional arguments that are passed to the `kubelet` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kubelet` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeletArgs               map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
-	// Additional arguments that are passed to `containerd` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to `containerd` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeContainerdArgs            map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
-	// Additional arguments that are passed to `k8s-dqlite` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to `k8s-dqlite` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeK8sDqliteArgs             map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml

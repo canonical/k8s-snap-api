@@ -23,21 +23,21 @@ type WorkerJoinConfig struct {
 
 	// Extra args to add to individual services (set any arg to null to delete)
 
-	// Additional arguments that are passed to the `kube-proxy` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kube-proxy` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeProxyArgs         map[string]*string `json:"extra-node-kube-proxy-args,omitempty" yaml:"extra-node-kube-proxy-args,omitempty"`
-	// Additional arguments that are passed to the `kubelet` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to the `kubelet` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeKubeletArgs           map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
-	// Additional arguments that are passed to `containerd` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to `containerd` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeContainerdArgs        map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
-	// Additional arguments that are passed to `k8s-api-server-proxy` only for that
-	// specific node. Overwrites default configuration. A parameter that is explicitly
-	// set to `null` is deleted. The format is `map[<--flag-name>]<value>`.
+	// Additional arguments that are passed to `k8s-api-server-proxy` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeK8sAPIServerProxyArgs map[string]*string `json:"extra-node-k8s-apiserver-proxy-args,omitempty" yaml:"extra-node-k8s-apiserver-proxy-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml

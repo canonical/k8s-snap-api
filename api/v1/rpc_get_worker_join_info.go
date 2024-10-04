@@ -42,5 +42,6 @@ type GetWorkerJoinInfoResponse struct {
 	// K8sdPublicKey is the public key that can be used to validate authenticity of cluster messages.
 	K8sdPublicKey string `json:"k8sdPublicKey,omitempty"`
 	// Annotations is a map of strings that can be used to store arbitrary metadata configuration.
+	// Please refer to the ClusterAPI annotations reference for further details on these options.
 	Annotations map[string]string `json:"annotations,omitempty"`
 }
