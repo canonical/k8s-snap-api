@@ -8,4 +8,4 @@ type ClusterAPIApproveWorkerCSRRequest struct {
 }
 
 // ClusterAPIApproveWorkerCSRResponse is the response message for the ClusterAPIApproveWorkerCSR RPC.
-type ClusrterAPIApproveWorkerCSRResponse struct{}
+type ClusterAPIApproveWorkerCSRResponse struct{}
