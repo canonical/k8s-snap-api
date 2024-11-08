@@ -34,6 +34,8 @@ type UserFacingClusterConfig struct {
 	Annotations map[string]string `json:"annotations,omitempty" yaml:"annotations,omitempty"`
 }
 
+func (c UserFacingClusterConfig) GetCloudProvider() string { return util.Deref(c.CloudProvider) }
+
 type DNSConfig struct {
 	// Determines if the feature should be enabled.
 	// If omitted defaults to `true`
