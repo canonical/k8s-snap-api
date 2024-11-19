@@ -94,6 +94,9 @@ type ControlPlaneJoinConfig struct {
 
 	// Extra configuration for the containerd config.toml
 	ExtraNodeContainerdConfig MapStringAny `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
+
+	// The base directory in which the containerd-related files are located.
+	ContainerdBaseDir string `json:"containerd-base-dir,omitempty" yaml:"containerd-base-dir,omitempty"`
 }
 
 func (c *ControlPlaneJoinConfig) GetFrontProxyClientCert() string {
