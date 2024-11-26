@@ -1,6 +1,13 @@
 package cilium
 
 const (
+	// Make Cilium take ownership over the `/etc/cni/net.d` directory on the
+	// node, renaming all non-Cilium CNI configurations to `*.cilium_bak`.
+	// This ensures no Pods can be scheduled using other CNI plugins during Cilium
+	// agent downtime.
+	// Leave this unset if you wish to use other CNIs such as Multus.
+	AnnotationCNIExclusive = "k8sd/v1alpha1/cilium/cni-exclusive"
+
 	// List of devices facing cluster/external network (used for BPF
 	// NodePort, BPF masquerading and host firewall); supports '+' as
 	// wildcard in device name, e.g. 'eth+'
