@@ -85,7 +85,7 @@ type LoadBalancerConfig struct {
 	// `LoadBalancer`.
 	CIDRs *[]string `json:"cidrs,omitempty" yaml:"cidrs,omitempty"`
 	// Determines if L2 mode should be enabled.
-	// If omitted defaults to `false`.
+	// If omitted defaults to `true`.
 	L2Mode *bool `json:"l2-mode,omitempty" yaml:"l2-mode,omitempty"`
 	// Sets the interfaces to be used for announcing IP addresses through ARP.
 	// If omitted all interfaces will be used.
