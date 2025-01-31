@@ -12,47 +12,53 @@ type ControlPlaneJoinConfig struct {
 
 	// The client certificate to be used for the front proxy.
 	// If omitted defaults to an auto generated certificate.
-	FrontProxyClientCert            *string `json:"front-proxy-client-crt,omitempty" yaml:"front-proxy-client-crt,omitempty"`
+	FrontProxyClientCert *string `json:"front-proxy-client-crt,omitempty" yaml:"front-proxy-client-crt,omitempty"`
 	// The client key to be used for the front proxy.
 	// If omitted defaults to an auto generated key.
-	FrontProxyClientKey             *string `json:"front-proxy-client-key,omitempty" yaml:"front-proxy-client-key,omitempty"`
+	FrontProxyClientKey *string `json:"front-proxy-client-key,omitempty" yaml:"front-proxy-client-key,omitempty"`
+	// The admin client certificate to be used for Kubernetes services.
+	// If omitted defaults to an auto generated certificate.
+	AdminClientCert *string `json:"admin-client-crt,omitempty" yaml:"admin-client-crt,omitempty"`
+	// The admin client key to be used for Kubernetes services.
+	// If omitted defaults to an auto generated key.
+	AdminClientKey *string `json:"admin-client-key,omitempty" yaml:"admin-client-key,omitempty"`
 	// The client certificate to be used by kubelet for communicating with the kube-apiserver.
 	// If omitted defaults to an auto generated certificate.
-	KubeProxyClientCert             *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
+	KubeProxyClientCert *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
 	// The client key to be used by kubelet for communicating with the kube-apiserver.
 	// If omitted defaults to an auto generated key.
-	KubeProxyClientKey              *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
+	KubeProxyClientKey *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
 	// The client certificate to be used for the kube-scheduler.
 	// If omitted defaults to an auto generated certificate.
-	KubeSchedulerClientCert         *string `json:"kube-scheduler-client-crt,omitempty" yaml:"kube-scheduler-client-crt,omitempty"`
+	KubeSchedulerClientCert *string `json:"kube-scheduler-client-crt,omitempty" yaml:"kube-scheduler-client-crt,omitempty"`
 	// The client key to be used for the kube-scheduler.
 	// If omitted defaults to an auto generated key.
-	KubeSchedulerClientKey          *string `json:"kube-scheduler-client-key,omitempty" yaml:"kube-scheduler-client-key,omitempty"`
+	KubeSchedulerClientKey *string `json:"kube-scheduler-client-key,omitempty" yaml:"kube-scheduler-client-key,omitempty"`
 	// The client certificate to be used for the Kubernetes controller manager.
 	// If omitted defaults to an auto generated certificate.
 	KubeControllerManagerClientCert *string `json:"kube-controller-manager-client-crt,omitempty" yaml:"kube-controller-manager-client-crt,omitempty"`
 	// The client key to be used for the Kubernetes controller manager.
 	// If omitted defaults to an auto generated key.
-	KubeControllerManagerClientKey  *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-ControllerManager-client-key,omitempty"`
+	KubeControllerManagerClientKey *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-controller-manager-client-key,omitempty"`
 
 	// The certificate to be used for the kube-apiserver.
 	// If omitted defaults to an auto generated certificate.
-	APIServerCert     *string `json:"apiserver-crt,omitempty" yaml:"apiserver-crt,omitempty"`
+	APIServerCert *string `json:"apiserver-crt,omitempty" yaml:"apiserver-crt,omitempty"`
 	// The key to be used for the kube-apiserver.
 	// If omitted defaults to an auto generated key.
-	APIServerKey      *string `json:"apiserver-key,omitempty" yaml:"apiserver-key,omitempty"`
+	APIServerKey *string `json:"apiserver-key,omitempty" yaml:"apiserver-key,omitempty"`
 	// The certificate to be used for the kubelet.
 	// If omitted defaults to an auto generated certificate.
-	KubeletCert       *string `json:"kubelet-crt,omitempty" yaml:"kubelet-crt,omitempty"`
+	KubeletCert *string `json:"kubelet-crt,omitempty" yaml:"kubelet-crt,omitempty"`
 	// The key to be used for the kubelet.
 	// If omitted defaults to an auto generated key.
-	KubeletKey        *string `json:"kubelet-key,omitempty" yaml:"kubelet-key,omitempty"`
+	KubeletKey *string `json:"kubelet-key,omitempty" yaml:"kubelet-key,omitempty"`
 	// The client certificate to be used for the kubelet.
 	// If omitted defaults to an auto generated certificate.
 	KubeletClientCert *string `json:"kubelet-client-crt,omitempty" yaml:"kubelet-client-crt,omitempty"`
 	// The client key to be used for the kubelet.
 	// If omitted defaults to an auto generated key.
-	KubeletClientKey  *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
+	KubeletClientKey *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
 
 	// Additional files that are uploaded `/var/snap/k8s/common/args/conf.d/<filename>`
 	// to a node on bootstrap. These files can then be referenced by Kubernetes
@@ -66,7 +72,7 @@ type ControlPlaneJoinConfig struct {
 	// Additional arguments that are passed to the `kube-apiserver` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeKubeAPIServerArgs         map[string]*string `json:"extra-node-kube-apiserver-args,omitempty" yaml:"extra-node-kube-apiserver-args,omitempty"`
+	ExtraNodeKubeAPIServerArgs map[string]*string `json:"extra-node-kube-apiserver-args,omitempty" yaml:"extra-node-kube-apiserver-args,omitempty"`
 	// Additional arguments that are passed to the `kube-controller-manager` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
@@ -74,23 +80,23 @@ type ControlPlaneJoinConfig struct {
 	// Additional arguments that are passed to the `kube-scheduler` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeKubeSchedulerArgs         map[string]*string `json:"extra-node-kube-scheduler-args,omitempty" yaml:"extra-node-kube-scheduler-args,omitempty"`
+	ExtraNodeKubeSchedulerArgs map[string]*string `json:"extra-node-kube-scheduler-args,omitempty" yaml:"extra-node-kube-scheduler-args,omitempty"`
 	// Additional arguments that are passed to the `kube-proxy` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeKubeProxyArgs             map[string]*string `json:"extra-node-kube-proxy-args,omitempty" yaml:"extra-node-kube-proxy-args,omitempty"`
+	ExtraNodeKubeProxyArgs map[string]*string `json:"extra-node-kube-proxy-args,omitempty" yaml:"extra-node-kube-proxy-args,omitempty"`
 	// Additional arguments that are passed to the `kubelet` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeKubeletArgs               map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
+	ExtraNodeKubeletArgs map[string]*string `json:"extra-node-kubelet-args,omitempty" yaml:"extra-node-kubelet-args,omitempty"`
 	// Additional arguments that are passed to `containerd` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeContainerdArgs            map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
+	ExtraNodeContainerdArgs map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
 	// Additional arguments that are passed to `k8s-dqlite` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeK8sDqliteArgs             map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
+	ExtraNodeK8sDqliteArgs map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml
 	ExtraNodeContainerdConfig MapStringAny `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
@@ -104,6 +110,12 @@ func (c *ControlPlaneJoinConfig) GetFrontProxyClientCert() string {
 }
 func (c *ControlPlaneJoinConfig) GetFrontProxyClientKey() string {
 	return util.Deref(c.FrontProxyClientKey)
+}
+func (c *ControlPlaneJoinConfig) GetAdminClientCert() string {
+	return util.Deref(c.AdminClientCert)
+}
+func (c *ControlPlaneJoinConfig) GetAdminClientKey() string {
+	return util.Deref(c.AdminClientKey)
 }
 func (b *ControlPlaneJoinConfig) GetKubeProxyClientCert() string {
 	return util.Deref(b.KubeProxyClientCert)
