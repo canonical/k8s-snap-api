@@ -1,0 +1,41 @@
+name: Go lint and unit tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Unit Tests & Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+
+      - name: go mod download
+        run: go mod download
+
+      - name: go fmt
+        run: |
+          go mod tidy
+          go fmt ./...
+
+      - name: check diff
+        run: |
+          if ! [ -z "$(git diff)" ]; then
+            echo "Detected changes that have not been committed to the repository"
+            echo "Please run 'go mod tidy && go fmt ./..."
+            echo "git diff:"
+            git diff
+            exit 1
+          fi
+
+      - name: go test
+        run: go test -v ./...
