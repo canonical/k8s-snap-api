@@ -218,3 +218,30 @@ func (b *BootstrapConfig) GetKubeletCert() string       { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.KubeletKey) }
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
+
+// UnmarshalYAML unmarshals a YAML into a BootstrapConfig, with the addition that it also
+// unmarshals 'kube-controller-manager-client-key' field into the KubeControllerManagerClientKey field,
+// if not already set.
+// TODO: remove once BootstrapConfig can unmarshal the 'kube-controller-manager-client-key' field
+// directly, instead of the current 'kube-ControllerManager-client-key' field.
+func (b *BootstrapConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	// Define an alias struct to handle the normal unmarshaling.
+	type Alias BootstrapConfig
+	aux := &struct {
+		Alias  `yaml:",inline"`
+		AltKey *string `yaml:"kube-controller-manager-client-key,omitempty"`
+	}{}
+
+	if err := unmarshal(&aux); err != nil {
+		return err
+	}
+
+	*b = BootstrapConfig(aux.Alias)
+
+	// If the original field is nil, but the alternate key is present, assign it.
+	if b.KubeControllerManagerClientKey == nil && aux.AltKey != nil {
+		b.KubeControllerManagerClientKey = aux.AltKey
+	}
+
+	return nil
+}
