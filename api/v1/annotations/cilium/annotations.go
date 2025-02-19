@@ -28,4 +28,7 @@ const (
 	// bypassing all VLANs.
 	// e.g., k8sd/v1alpha1/cilium/vlan-bpf-bypass="4001,4002"
 	AnnotationVLANBPFBypass = "k8sd/v1alpha1/cilium/vlan-bpf-bypass"
+
+	// Enable the Cilium SCTP feature.
+	AnnotationSCTPEnabled = "k8sd/v1alpha1/cilium/sctp/enabled"
 )
