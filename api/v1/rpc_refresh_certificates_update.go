@@ -31,7 +31,7 @@ type RefreshCertificatesUpdateRequest struct {
 	// The client certificate to be used for the Kubernetes controller manager.
 	KubeControllerManagerClientCert *string `json:"kube-controller-manager-client-crt,omitempty" yaml:"kube-controller-manager-client-crt,omitempty"`
 	// The client key to be used for the Kubernetes controller manager.
-	KubeControllerManagerClientKey *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-ControllerManager-client-key,omitempty"`
+	KubeControllerManagerClientKey *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-controller-manager-client-key,omitempty"`
 	// The certificate to be used for the kube-apiserver.
 	APIServerCert *string `json:"apiserver-crt,omitempty" yaml:"apiserver-crt,omitempty"`
 	// The key to be used for the kube-apiserver.
