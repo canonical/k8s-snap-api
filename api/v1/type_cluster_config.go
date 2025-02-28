@@ -142,6 +142,10 @@ type NetworkConfig struct {
 	// Determines if the feature should be enabled.
 	// If omitted defaults to `true`
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
+	// PodCIDR is the CIDR range for the pods in the cluster.
+	PodCIDR *string `json:"pod-cidr,omitempty" yaml:"pod-cidr,omitempty"`
+	// ServiceCIDR is the CIDR range for the services in the cluster.
+	ServiceCIDR *string `json:"service-cidr,omitempty" yaml:"service-cidr,omitempty"`
 }
 
 func (c NetworkConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
@@ -163,7 +167,7 @@ type MetricsServerConfig struct {
 func (c MetricsServerConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
 
 type UserFacingDatastoreConfig struct {
-	// Type of the datastore. Needs to be "external".
+	// Type of the datastore.
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
 	// Datastore server addresses.
 	Servers *[]string `json:"servers,omitempty" yaml:"servers,omitempty"`
