@@ -12,4 +12,6 @@ type NodeStatus struct {
 	// DatastoreRole is the role that the node has within the datastore cluster.
 	// Only applicable for control-plane nodes, empty for workers.
 	DatastoreRole DatastoreRole `json:"datastore-role,omitempty" yaml:"datastore-role,omitempty"`
+	// Taints is a list of taints applied to the node.
+	Taints *[]string `json:"taints,omitempty" yaml:"taints,omitempty"`
 }
