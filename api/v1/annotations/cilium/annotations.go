@@ -31,4 +31,12 @@ const (
 
 	// Enable the Cilium SCTP feature.
 	AnnotationSCTPEnabled = "k8sd/v1alpha1/cilium/sctp/enabled"
+
+	// Set the VXLAN tunnel port. if not provided, default value is port 8472.
+	// In cases where you have specific firewall requirements or you have
+	// fan networking enabled on your underlay network with the same vxlan
+	// destination port, setting this option to a different port could mitigate
+	// the issues.
+	// e.g., k8sd/v1alpha1/cilium/tunnel-port="8473"
+	AnnotationTunnelPort = "k8sd/v1alpha1/cilium/tunnel-port"
 )
