@@ -163,7 +163,7 @@ type MetricsServerConfig struct {
 func (c MetricsServerConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
 
 type UserFacingDatastoreConfig struct {
-	// Type of the datastore. Needs to be "external".
+	// Type of the datastore.
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
 	// Datastore server addresses.
 	Servers *[]string `json:"servers,omitempty" yaml:"servers,omitempty"`

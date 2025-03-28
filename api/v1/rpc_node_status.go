@@ -9,4 +9,6 @@ type NodeStatusRequest struct{}
 // NodeStatusResponse is the response message for the NodeStatus RPC.
 type NodeStatusResponse struct {
 	NodeStatus NodeStatus `json:"status"`
+	// Taints is a list of taints applied to the node.
+	Taints []string `json:"taints,omitempty" yaml:"taints,omitempty"`
 }
