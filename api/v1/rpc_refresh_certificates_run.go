@@ -5,6 +5,8 @@ const RefreshCertificatesRunRPC = "k8sd/refresh-certs/run"
 
 // RefreshCertificatesRunRequest is the request message for the RefreshCertificatesRun RPC.
 type RefreshCertificatesRunRequest struct {
+	// Certificates is an optional list of certificate names to refresh.
+	Certificates []string `json:"certificates"`
 	// Seed must match the value returned by the RefreshCertificatesPlan RPC.
 	Seed int `json:"seed"`
 	// ExpirationSeconds is the desired duration of the new certificates.
