@@ -4,7 +4,10 @@ package apiv1
 const RefreshCertificatesPlanRPC = "k8sd/refresh-certs/plan"
 
 // RefreshCertificatesPlanRequest is the request message for the RefreshCertificatesPlan RPC.
-type RefreshCertificatesPlanRequest struct{}
+type RefreshCertificatesPlanRequest struct {
+	// Certificates is an optional list of certificate names to refresh.
+	Certificates []string `json:"certificates"`
+}
 
 // RefreshCertificatesPlanResponse is the response message for the RefreshCertificatesPlan RPC.
 type RefreshCertificatesPlanResponse struct {
