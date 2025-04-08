@@ -10,4 +10,9 @@ const (
 	// This is useful, if an external controller (e.g. CAPI) is responsible for the Kubernetes node life cycle.
 	// By default, all services are stopped on leaving nodes.
 	AnnotationSkipStopServicesOnRemove = "k8sd/v1alpha/lifecycle/skip-stop-services-on-remove"
+
+	// AnnotationDisableSeparateFeatureUpgrades if set, the separate feature upgrade is disabled.
+	// This is useful, if an external controller (e.g. CAPI) is responsible for the Kubernetes node life cycle.
+	// By default, the feature upgrade will be done after all nodes in a cluster are upgraded.
+	AnnotationDisableSeparateFeatureUpgrades = "k8sd/v1alpha/lifecycle/disable-separate-feature-upgrades"
 )
