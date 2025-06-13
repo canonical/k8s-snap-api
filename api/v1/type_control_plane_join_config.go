@@ -60,6 +60,15 @@ type ControlPlaneJoinConfig struct {
 	// If omitted defaults to an auto generated key.
 	KubeletClientKey *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
 
+	// The certificate to be used for the etcd server.
+	EtcdServerCert *string `json:"etcd-server-crt,omitempty" yaml:"etcd-server-crt,omitempty"`
+	// The key to be used for the etcd server.
+	EtcdServerKey *string `json:"etcd-server-key,omitempty" yaml:"etcd-server-key,omitempty"`
+	// The certificate to be used for the etcd server peer communication.
+	EtcdServerPeerCert *string `json:"etcd-peer-crt,omitempty" yaml:"etcd-peer-crt,omitempty"`
+	// The key to be used for the etcd server peer communication.
+	EtcdServerPeerKey *string `json:"etcd-peer-key,omitempty" yaml:"etcd-peer-key,omitempty"`
+
 	// Additional files that are uploaded `/var/snap/k8s/common/args/conf.d/<filename>`
 	// to a node on bootstrap. These files can then be referenced by Kubernetes
 	// service arguments.
@@ -97,6 +106,10 @@ type ControlPlaneJoinConfig struct {
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeK8sDqliteArgs map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
+	// Additional arguments that are passed to `etcd` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
+	ExtraNodeEtcdArgs map[string]*string `json:"extra-node-etcd-args,omitempty" yaml:"extra-node-etcd-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml
 	ExtraNodeContainerdConfig MapStringAny `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
@@ -144,4 +157,13 @@ func (c *ControlPlaneJoinConfig) GetKubeletClientCert() string {
 }
 func (c *ControlPlaneJoinConfig) GetKubeletClientKey() string {
 	return util.Deref(c.KubeletClientKey)
+}
+
+func (b *ControlPlaneJoinConfig) GetEtcdServerCert() string { return util.Deref(b.EtcdServerCert) }
+func (b *ControlPlaneJoinConfig) GetEtcdServerKey() string  { return util.Deref(b.EtcdServerKey) }
+func (b *ControlPlaneJoinConfig) GetEtcdServerPeerCert() string {
+	return util.Deref(b.EtcdServerPeerCert)
+}
+func (b *ControlPlaneJoinConfig) GetEtcdServerPeerKey() string {
+	return util.Deref(b.EtcdServerPeerKey)
 }
