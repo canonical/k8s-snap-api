@@ -21,6 +21,9 @@ type BootstrapConfig struct {
 	// Determines if RBAC should be disabled.
 	// If omitted defaults to `false`.
 	DisableRBAC *bool `json:"disable-rbac,omitempty" yaml:"disable-rbac,omitempty"`
+	// Determines whether system tuning is allowed.
+	// If omitted defaults to `true`.
+	EnableSystemTuning *bool `json:"enable-system-tuning,omitempty" yaml:"enable-system-tuning,omitempty"`
 	// The port number for kube-apiserver to use.
 	// If omitted defaults to `6443`.
 	SecurePort *int `json:"secure-port,omitempty" yaml:"secure-port,omitempty"`
