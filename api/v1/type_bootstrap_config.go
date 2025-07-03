@@ -21,6 +21,9 @@ type BootstrapConfig struct {
 	// Determines if RBAC should be disabled.
 	// If omitted defaults to `false`.
 	DisableRBAC *bool `json:"disable-rbac,omitempty" yaml:"disable-rbac,omitempty"`
+	// Determines whether system tuning is allowed.
+	// If omitted defaults to `true`.
+	DisableSystemTuning *bool `json:"disable-system-tuning,omitempty" yaml:"disable-system-tuning,omitempty"`
 	// The port number for kube-apiserver to use.
 	// If omitted defaults to `6443`.
 	SecurePort *int `json:"secure-port,omitempty" yaml:"secure-port,omitempty"`
@@ -218,6 +221,7 @@ func (b *BootstrapConfig) GetKubeletCert() string       { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.KubeletKey) }
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
+func (b *BootstrapConfig) GetDisableSystemTuning() bool { return util.Deref(b.DisableSystemTuning) }
 
 // UnmarshalYAML unmarshals a YAML into a BootstrapConfig, with the addition that it also
 // unmarshals 'kube-controller-manager-client-key' field into the KubeControllerManagerClientKey field,
