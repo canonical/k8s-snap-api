@@ -24,7 +24,7 @@ type WorkerJoinConfig struct {
 
 	// Determines whether system tuning is allowed.
 	// If omitted defaults to `true`.
-	EnableSystemTuning *bool `json:"enable-system-tuning,omitempty" yaml:"enable-system-tuning,omitempty"`
+	DisableSystemTuning *bool `json:"disable-system-tuning,omitempty" yaml:"disable-system-tuning,omitempty"`
 	// Additional files that are uploaded `/var/snap/k8s/common/args/conf.d/<filename>`
 	// to a node on bootstrap. These files can then be referenced by Kubernetes
 	// service arguments.
@@ -68,4 +68,4 @@ func (w *WorkerJoinConfig) GetKubeProxyClientCert() string {
 func (w *WorkerJoinConfig) GetKubeProxyClientKey() string {
 	return util.Deref(w.KubeProxyClientKey)
 }
-func (w *WorkerJoinConfig) GetEnableSystemTuning() bool { return util.Deref(w.EnableSystemTuning) }
+func (w *WorkerJoinConfig) GetDisableSystemTuning() bool { return util.Deref(w.DisableSystemTuning) }
