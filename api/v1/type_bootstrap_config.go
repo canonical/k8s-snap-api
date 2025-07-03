@@ -221,6 +221,7 @@ func (b *BootstrapConfig) GetKubeletCert() string       { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.KubeletKey) }
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
+func (b *BootstrapConfig) GetEnableSystemTuning() bool  { return util.Deref(b.EnableSystemTuning) }
 
 // UnmarshalYAML unmarshals a YAML into a BootstrapConfig, with the addition that it also
 // unmarshals 'kube-controller-manager-client-key' field into the KubeControllerManagerClientKey field,

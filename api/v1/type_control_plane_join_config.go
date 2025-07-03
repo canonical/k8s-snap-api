@@ -148,3 +148,6 @@ func (c *ControlPlaneJoinConfig) GetKubeletClientCert() string {
 func (c *ControlPlaneJoinConfig) GetKubeletClientKey() string {
 	return util.Deref(c.KubeletClientKey)
 }
+func (c *ControlPlaneJoinConfig) GetEnableSystemTuning() bool {
+	return util.Deref(c.EnableSystemTuning)
+}

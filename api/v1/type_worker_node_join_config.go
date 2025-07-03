@@ -68,3 +68,4 @@ func (w *WorkerJoinConfig) GetKubeProxyClientCert() string {
 func (w *WorkerJoinConfig) GetKubeProxyClientKey() string {
 	return util.Deref(w.KubeProxyClientKey)
 }
+func (w *WorkerJoinConfig) GetEnableSystemTuning() bool { return util.Deref(w.EnableSystemTuning) }
