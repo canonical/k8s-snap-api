@@ -31,11 +31,11 @@ type BootstrapConfig struct {
 	// If omitted defaults to `9000`.
 	K8sDqlitePort *int `json:"k8s-dqlite-port,omitempty" yaml:"k8s-dqlite-port,omitempty"`
 	// The type of datastore to be used.
-	// If omitted defaults to `k8s-dqlite`.
+	// If omitted defaults to `etcd`.
 	//
 	// Can be used to point to an external datastore like etcd.
 	//
-	// Possible Values: `k8s-dqlite | external`.
+	// Possible Values: `k8s-dqlite | etcd | external`.
 	DatastoreType *string `json:"datastore-type,omitempty" yaml:"datastore-type,omitempty"`
 	// The server addresses to be used when `datastore-type` is set to `external`.
 	DatastoreServers []string `json:"datastore-servers,omitempty" yaml:"datastore-servers,omitempty"`
@@ -46,6 +46,32 @@ type BootstrapConfig struct {
 	DatastoreClientCert *string `json:"datastore-client-crt,omitempty" yaml:"datastore-client-crt,omitempty"`
 	// The client key to be used when communicating with the external datastore.
 	DatastoreClientKey *string `json:"datastore-client-key,omitempty" yaml:"datastore-client-key,omitempty"`
+
+	// Datastore configuration for type "etcd"
+
+	// The port number for etcd to use.
+	EtcdPort *int `json:"etcd-port,omitempty" yaml:"etcd-port,omitempty"`
+	// The port number for etcd peer communication to use.
+	EtcdPeerPort *int `json:"etcd-peer-port,omitempty" yaml:"etcd-peer-port,omitempty"`
+
+	// Seed certificates for datastore type "etcd"
+
+	// The CA certificate to be used for etcd.
+	EtcdCACert *string `json:"etcd-ca-crt,omitempty" yaml:"etcd-ca-crt,omitempty"`
+	// The CA key to be used for etcd.
+	EtcdCAKey *string `json:"etcd-ca-key,omitempty" yaml:"etcd-ca-key,omitempty"`
+	// The server certificate to be used for etcd.
+	EtcdServerCert *string `json:"etcd-server-crt,omitempty" yaml:"etcd-server-crt,omitempty"`
+	// The server key to be used for etcd.
+	EtcdServerKey *string `json:"etcd-server-key,omitempty" yaml:"etcd-server-key,omitempty"`
+	// The server peer certificate to be used for etcd.
+	EtcdServerPeerCert *string `json:"etcd-peer-crt,omitempty" yaml:"etcd-peer-crt,omitempty"`
+	// The server peer key to be used for etcd.
+	EtcdServerPeerKey *string `json:"etcd-peer-key,omitempty" yaml:"etcd-peer-key,omitempty"`
+	// The client certificate to be used by the kube-apiserver to communicate with etcd.
+	EtcdAPIServerClientCert *string `json:"etcd-apiserver-client-crt,omitempty" yaml:"etcd-apiserver-client-crt,omitempty"`
+	// The client key to be used by the kube-apiserver to communicate with etcd.
+	EtcdAPIServerClientKey *string `json:"etcd-apiserver-client-key,omitempty" yaml:"etcd-apiserver-client-key,omitempty"`
 
 	// Seed configuration for certificates
 
@@ -171,6 +197,10 @@ type BootstrapConfig struct {
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeK8sDqliteArgs map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
+	// Additional arguments that are passed to `etcd` only for that specific node.
+	// A parameter that is explicitly set to `null` is deleted.
+	// The format is `map[<--flag-name>]<value>`.
+	ExtraNodeEtcdArgs map[string]*string `json:"extra-node-etcd-args,omitempty" yaml:"extra-node-etcd-args,omitempty"`
 
 	// Extra configuration for the containerd config.toml
 	ExtraNodeContainerdConfig MapStringAny `json:"extra-node-containerd-config,omitempty" yaml:"extra-node-containerd-config,omitempty"`
@@ -202,6 +232,23 @@ func (b *BootstrapConfig) GetAdminClientCert() string     { return util.Deref(b.
 func (b *BootstrapConfig) GetAdminClientKey() string      { return util.Deref(b.AdminClientKey) }
 func (b *BootstrapConfig) GetKubeProxyClientCert() string { return util.Deref(b.KubeProxyClientCert) }
 func (b *BootstrapConfig) GetKubeProxyClientKey() string  { return util.Deref(b.KubeProxyClientKey) }
+
+func (b *BootstrapConfig) GetEtcdPort() int     { return util.Deref(b.EtcdPort) }
+func (b *BootstrapConfig) GetEtcdPeerPort() int { return util.Deref(b.EtcdPeerPort) }
+
+func (b *BootstrapConfig) GetEtcdCACert() string         { return util.Deref(b.EtcdCACert) }
+func (b *BootstrapConfig) GetEtcdCAKey() string          { return util.Deref(b.EtcdCAKey) }
+func (b *BootstrapConfig) GetEtcdServerCert() string     { return util.Deref(b.EtcdServerCert) }
+func (b *BootstrapConfig) GetEtcdServerKey() string      { return util.Deref(b.EtcdServerKey) }
+func (b *BootstrapConfig) GetEtcdServerPeerCert() string { return util.Deref(b.EtcdServerPeerCert) }
+func (b *BootstrapConfig) GetEtcdServerPeerKey() string  { return util.Deref(b.EtcdServerPeerKey) }
+func (b *BootstrapConfig) GetEtcdAPIServerClientCert() string {
+	return util.Deref(b.EtcdAPIServerClientCert)
+}
+func (b *BootstrapConfig) GetEtcdAPIServerClientKey() string {
+	return util.Deref(b.EtcdAPIServerClientKey)
+}
+
 func (b *BootstrapConfig) GetKubeSchedulerClientCert() string {
 	return util.Deref(b.KubeSchedulerClientCert)
 }
