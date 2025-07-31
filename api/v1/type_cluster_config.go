@@ -32,6 +32,7 @@ type UserFacingClusterConfig struct {
 	// Annotations is a map of strings that can be used to store arbitrary metadata configuration.
 	// Please refer to the annotations reference for further details on these options.
 	Annotations map[string]string `json:"annotations,omitempty" yaml:"annotations,omitempty"`
+	Compliance  map[string]any    `json:"compliance,omitempty" yaml:"compliance,omitempty"`
 }
 
 type DNSConfig struct {
