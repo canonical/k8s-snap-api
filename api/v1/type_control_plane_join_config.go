@@ -60,6 +60,9 @@ type ControlPlaneJoinConfig struct {
 	// If omitted defaults to an auto generated key.
 	KubeletClientKey *string `json:"kubelet-client-key,omitempty" yaml:"kubelet-client-key,omitempty"`
 
+	// The DISA STIG compliance profile to be used for hardening Kubernetes.
+	// If omitted defaults to `default`.
+	ComplianceProfile *string `json:"compliance-profile,omitempty" yaml:"compliance-profile,omitempty"`
 	// Determines whether system tuning is allowed.
 	// If omitted defaults to `true`.
 	DisableSystemTuning *bool `json:"disable-system-tuning,omitempty" yaml:"disable-system-tuning,omitempty"`
@@ -161,6 +164,9 @@ func (c *ControlPlaneJoinConfig) GetKubeletClientCert() string {
 }
 func (c *ControlPlaneJoinConfig) GetKubeletClientKey() string {
 	return util.Deref(c.KubeletClientKey)
+}
+func (c *ControlPlaneJoinConfig) GetComplianceProfile() string {
+	return util.Deref(c.ComplianceProfile)
 }
 func (c *ControlPlaneJoinConfig) GetDisableSystemTuning() bool {
 	return util.Deref(c.DisableSystemTuning)
