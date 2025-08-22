@@ -24,7 +24,7 @@ type WorkerJoinConfig struct {
 
 	// The DISA STIG compliance profile to be used for hardening Kubernetes.
 	// If omitted defaults to `default`.
-	ComplianceProfile *string `json:"compliance-profile,omitempty" yaml:"compliance-profile,omitempty"`
+	StigComplianceProfile *string `json:"stig-compliance-profile,omitempty" yaml:"stig-compliance-profile,omitempty"`
 	// Determines whether system tuning is allowed.
 	// If omitted defaults to `true`.
 	DisableSystemTuning *bool `json:"disable-system-tuning,omitempty" yaml:"disable-system-tuning,omitempty"`
@@ -71,5 +71,7 @@ func (w *WorkerJoinConfig) GetKubeProxyClientCert() string {
 func (w *WorkerJoinConfig) GetKubeProxyClientKey() string {
 	return util.Deref(w.KubeProxyClientKey)
 }
-func (w *WorkerJoinConfig) GetComplianceProfile() string { return util.Deref(w.ComplianceProfile) }
+func (w *WorkerJoinConfig) GetStigComplianceProfile() string {
+	return util.Deref(w.StigComplianceProfile)
+}
 func (w *WorkerJoinConfig) GetDisableSystemTuning() bool { return util.Deref(w.DisableSystemTuning) }

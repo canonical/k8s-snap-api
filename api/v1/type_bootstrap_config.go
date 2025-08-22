@@ -20,7 +20,7 @@ type BootstrapConfig struct {
 	ServiceCIDR *string `json:"service-cidr,omitempty" yaml:"service-cidr,omitempty"`
 	// The DISA STIG compliance profile to be used for hardening Kubernetes.
 	// If omitted defaults to `default`.
-	ComplianceProfile *string `json:"compliance-profile,omitempty" yaml:"compliance-profile,omitempty"`
+	StigComplianceProfile *string `json:"stig-compliance-profile,omitempty" yaml:"stig-compliance-profile,omitempty"`
 	// Determines if RBAC should be disabled.
 	// If omitted defaults to `false`.
 	DisableRBAC *bool `json:"disable-rbac,omitempty" yaml:"disable-rbac,omitempty"`
@@ -271,7 +271,9 @@ func (b *BootstrapConfig) GetKubeletCert() string       { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.KubeletKey) }
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
-func (b *BootstrapConfig) GetComplianceProfile() string { return util.Deref(b.ComplianceProfile) }
+func (b *BootstrapConfig) GetStigComplianceProfile() string {
+	return util.Deref(b.StigComplianceProfile)
+}
 func (b *BootstrapConfig) GetDisableSystemTuning() bool { return util.Deref(b.DisableSystemTuning) }
 
 // UnmarshalYAML unmarshals a YAML into a BootstrapConfig, with the addition that it also
