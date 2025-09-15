@@ -15,4 +15,6 @@ type ClusterStatus struct {
 	Gateway       FeatureStatus `json:"gateway,omitempty" yaml:"gateway,omitempty"`
 	MetricsServer FeatureStatus `json:"metrics-server,omitempty" yaml:"metrics-server,omitempty"`
 	LocalStorage  FeatureStatus `json:"local-storage,omitempty" yaml:"local-storage,omitempty"`
+
+	Upgrades []Upgrade `json:"upgrades,omitempty" yaml:"upgrades,omitempty"`
 }
