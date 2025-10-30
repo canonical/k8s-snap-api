@@ -15,4 +15,9 @@ const (
 	// This is useful, if an external controller (e.g. CAPI) is responsible for the Kubernetes node life cycle.
 	// By default, the feature upgrade will be done after all nodes in a cluster are upgraded.
 	AnnotationDisableSeparateFeatureUpgrades = "k8sd/v1alpha/lifecycle/disable-separate-feature-upgrades"
+
+	// AnnotationServicesStopDelay defines a delay in seconds before stopping services on a leaving node.
+	// This can be useful to allow time for services to take care of draining, etc before they stop.
+	// By default, there is no delay and services are stopped immediately (unless AnnotationSkipStopServicesOnRemove is set).
+	AnnotationServicesStopDelay = "k8sd/v1alpha/lifecycle/services-stop-delay"
 )
