@@ -13,4 +13,16 @@ type RemoveNodeRequest struct {
 }
 
 // RemoveNodeResponse is the response message for the RemoveNode RPC.
-type RemoveNodeResponse struct{}
+type RemoveNodeResponse struct {
+	// Errors holds error messages from the various subsystems involved
+	// (if any). This is useful when Force is true and some subsystems
+	// fail to remove the node.
+	Errors *RemoveNodeErrors `json:"errors,omitempty"`
+}
+
+// RemoveNodeErrors holds error messages from the various subsystems involved
+type RemoveNodeErrors struct {
+	Kubernetes   string `json:"kubernetes,omitempty"`
+	Datastore    string `json:"datastore,omitempty"`
+	Microcluster string `json:"microcluster,omitempty"`
+}
