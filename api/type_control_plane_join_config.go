@@ -106,13 +106,6 @@ type ControlPlaneJoinConfig struct {
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeContainerdArgs map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
-	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
-	// We recommend against bootstrapping new clusters with k8s-dqlite.
-	//
-	// Additional arguments that are passed to `k8s-dqlite` only for that specific node.
-	// A parameter that is explicitly set to `null` is deleted.
-	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeK8sDqliteArgs map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 	// Additional arguments that are passed to `etcd` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.

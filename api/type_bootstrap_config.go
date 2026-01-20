@@ -27,20 +27,12 @@ type BootstrapConfig struct {
 	// The port number for kube-apiserver to use.
 	// If omitted defaults to `6443`.
 	SecurePort *int `json:"secure-port,omitempty" yaml:"secure-port,omitempty"`
-	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
-	// We recommend against bootstrapping new clusters with k8s-dqlite.
-	//
-	// The port number for k8s-dqlite to use.
-	// If omitted defaults to `9000`.
-	K8sDqlitePort *int `json:"k8s-dqlite-port,omitempty" yaml:"k8s-dqlite-port,omitempty"`
 	// The type of datastore to be used.
 	// If omitted defaults to `etcd`.
 	//
 	// Can be used to point to an external datastore like etcd.
 	//
-	// Possible Values: `k8s-dqlite | etcd | external`.
-	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
-	// We recommend against bootstrapping new clusters with k8s-dqlite.
+	// Possible Values: `etcd | external`.
 	DatastoreType *string `json:"datastore-type,omitempty" yaml:"datastore-type,omitempty"`
 	// The server addresses to be used when `datastore-type` is set to `external`.
 	DatastoreServers []string `json:"datastore-servers,omitempty" yaml:"datastore-servers,omitempty"`
@@ -198,13 +190,6 @@ type BootstrapConfig struct {
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeContainerdArgs map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
-	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
-	// We recommend against bootstrapping new clusters with k8s-dqlite.
-	//
-	// Additional arguments that are passed to `k8s-dqlite` only for that specific node.
-	// A parameter that is explicitly set to `null` is deleted.
-	// The format is `map[<--flag-name>]<value>`.
-	ExtraNodeK8sDqliteArgs map[string]*string `json:"extra-node-k8s-dqlite-args,omitempty" yaml:"extra-node-k8s-dqlite-args,omitempty"`
 	// Additional arguments that are passed to `etcd` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
@@ -221,7 +206,6 @@ func (b *BootstrapConfig) GetDatastoreType() string        { return util.Deref(b
 func (b *BootstrapConfig) GetDatastoreCACert() string      { return util.Deref(b.DatastoreCACert) }
 func (b *BootstrapConfig) GetDatastoreClientCert() string  { return util.Deref(b.DatastoreClientCert) }
 func (b *BootstrapConfig) GetDatastoreClientKey() string   { return util.Deref(b.DatastoreClientKey) }
-func (b *BootstrapConfig) GetK8sDqlitePort() int           { return util.Deref(b.K8sDqlitePort) }
 func (b *BootstrapConfig) GetCACert() string               { return util.Deref(b.CACert) }
 func (b *BootstrapConfig) GetCAKey() string                { return util.Deref(b.CAKey) }
 func (b *BootstrapConfig) GetClientCACert() string         { return util.Deref(b.ClientCACert) }
