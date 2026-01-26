@@ -27,6 +27,9 @@ type BootstrapConfig struct {
 	// The port number for kube-apiserver to use.
 	// If omitted defaults to `6443`.
 	SecurePort *int `json:"secure-port,omitempty" yaml:"secure-port,omitempty"`
+	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
+	// We recommend against bootstrapping new clusters with k8s-dqlite.
+	//
 	// The port number for k8s-dqlite to use.
 	// If omitted defaults to `9000`.
 	K8sDqlitePort *int `json:"k8s-dqlite-port,omitempty" yaml:"k8s-dqlite-port,omitempty"`
@@ -36,6 +39,8 @@ type BootstrapConfig struct {
 	// Can be used to point to an external datastore like etcd.
 	//
 	// Possible Values: `k8s-dqlite | etcd | external`.
+	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
+	// We recommend against bootstrapping new clusters with k8s-dqlite.
 	DatastoreType *string `json:"datastore-type,omitempty" yaml:"datastore-type,omitempty"`
 	// The server addresses to be used when `datastore-type` is set to `external`.
 	DatastoreServers []string `json:"datastore-servers,omitempty" yaml:"datastore-servers,omitempty"`
@@ -193,6 +198,9 @@ type BootstrapConfig struct {
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
 	ExtraNodeContainerdArgs map[string]*string `json:"extra-node-containerd-args,omitempty" yaml:"extra-node-containerd-args,omitempty"`
+	// Deprecated: k8s-dqlite is being deprecated and will be removed in Canonical Kubernetes 1.36 without an upgrade path.
+	// We recommend against bootstrapping new clusters with k8s-dqlite.
+	//
 	// Additional arguments that are passed to `k8s-dqlite` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
 	// The format is `map[<--flag-name>]<value>`.
