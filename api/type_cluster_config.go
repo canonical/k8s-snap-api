@@ -3,7 +3,7 @@ package api
 import (
 	"fmt"
 
-	"github.com/canonical/k8s-snap-api/internal/util"
+	"github.com/canonical/k8s-snap-api/v2/internal/util"
 	"gopkg.in/yaml.v2"
 )
 

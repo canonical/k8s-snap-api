@@ -1,6 +1,6 @@
 package api
 
-import "github.com/canonical/k8s-snap-api/internal/util"
+import "github.com/canonical/k8s-snap-api/v2/internal/util"
 
 // BootstrapConfig is used to seed cluster configuration when bootstrapping a new cluster.
 type BootstrapConfig struct {
