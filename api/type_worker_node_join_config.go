@@ -1,6 +1,6 @@
 package api
 
-import "github.com/canonical/k8s-snap-api/internal/util"
+import "github.com/canonical/k8s-snap-api/v2/internal/util"
 
 type WorkerJoinConfig struct {
 	// The certificate to be used for the kubelet.
