@@ -139,7 +139,7 @@ type BootstrapConfig struct {
 	KubeControllerManagerClientCert *string `json:"kube-controller-manager-client-crt,omitempty" yaml:"kube-controller-manager-client-crt,omitempty"`
 	// The client key to be used for the Kubernetes controller manager.
 	// If omitted defaults to an auto generated key.
-	KubeControllerManagerClientKey *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-ControllerManager-client-key,omitempty"`
+	KubeControllerManagerClientKey *string `json:"kube-controller-manager-client-key,omitempty" yaml:"kube-controller-manager-client-key,omitempty"`
 	// The key to be used by the default service account.
 	// If omitted defaults to an auto generated key.
 	ServiceAccountKey *string `json:"service-account-key,omitempty" yaml:"service-account-key,omitempty"`
@@ -277,30 +277,3 @@ func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
 func (b *BootstrapConfig) GetDisableSystemTuning() bool { return util.Deref(b.DisableSystemTuning) }
-
-// UnmarshalYAML unmarshals a YAML into a BootstrapConfig, with the addition that it also
-// unmarshals 'kube-controller-manager-client-key' field into the KubeControllerManagerClientKey field,
-// if not already set.
-// TODO: remove once BootstrapConfig can unmarshal the 'kube-controller-manager-client-key' field
-// directly, instead of the current 'kube-ControllerManager-client-key' field.
-func (b *BootstrapConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
-	// Define an alias struct to handle the normal unmarshaling.
-	type Alias BootstrapConfig
-	aux := &struct {
-		Alias  `yaml:",inline"`
-		AltKey *string `yaml:"kube-controller-manager-client-key,omitempty"`
-	}{}
-
-	if err := unmarshal(&aux); err != nil {
-		return err
-	}
-
-	*b = BootstrapConfig(aux.Alias)
-
-	// If the original field is nil, but the alternate key is present, assign it.
-	if b.KubeControllerManagerClientKey == nil && aux.AltKey != nil {
-		b.KubeControllerManagerClientKey = aux.AltKey
-	}
-
-	return nil
-}
