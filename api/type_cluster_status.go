@@ -2,8 +2,12 @@ package api
 
 // ClusterStatus holds information about the cluster, e.g. its current members
 type ClusterStatus struct {
-	// Ready is true if at least one node in the cluster is in READY state.
-	Ready     bool                    `json:"ready,omitempty"`
+	// Ready is true if at least one node in the cluster is in READY state,
+	// and there's a cluster IP for the coredns service.
+	Ready               bool `json:"ready,omitempty"`
+	HasReadyNodes       bool `json:"has-ready-nodes,omitempty"`
+	HasCoreDNSClusterIP bool `json:"has-coredns-cluster-ip,omitempty"`
+
 	Members   []NodeStatus            `json:"members,omitempty"`
 	Config    UserFacingClusterConfig `json:"config,omitempty"`
 	Datastore Datastore               `json:"datastore,omitempty"`
