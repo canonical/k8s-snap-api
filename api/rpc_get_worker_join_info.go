@@ -44,6 +44,6 @@ type GetWorkerJoinInfoResponse struct {
 	// Annotations is a map of strings that can be used to store arbitrary metadata configuration.
 	// Please refer to the ClusterAPI annotations reference for further details on these options.
 	Annotations map[string]string `json:"annotations,omitempty"`
-	// KubeProxyFree indicates if kube-proxy should be disabled
-	KubeProxyFree bool `json:"kube-proxy-free,omitempty"`
+	// KubeProxyEnabled indicates if kube-proxy should be enabled
+	KubeProxyEnabled bool `json:"kube-proxy-enabled,omitempty"`
 }
