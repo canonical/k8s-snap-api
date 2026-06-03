@@ -145,11 +145,16 @@ type NetworkConfig struct {
 	// Determines if kube-proxy should be enabled.
 	// When network is enabled, this is implicitly false.
 	// If omitted defaults to `true`.
-	KubeProxyEnabled *bool `json:"kube-proxy-enabled,omitempty" yaml:"kube-proxy-enabled,omitempty"`
+	KubeProxyEnabled *bool `json:"kube-proxy-enabled" yaml:"kube-proxy-enabled"`
 }
 
-func (c NetworkConfig) GetEnabled() bool          { return util.Deref(c.Enabled) }
-func (c NetworkConfig) GetKubeProxyEnabled() bool { return util.Deref(c.KubeProxyEnabled) }
+func (c NetworkConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
+func (c NetworkConfig) GetKubeProxyEnabled() bool {
+	if c.KubeProxyEnabled == nil {
+		return true
+	}
+	return util.Deref(c.KubeProxyEnabled)
+}
 
 type GatewayConfig struct {
 	// Determines if the feature should be enabled.
