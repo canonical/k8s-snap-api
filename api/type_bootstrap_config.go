@@ -75,6 +75,12 @@ type BootstrapConfig struct {
 	// List of extra SANs to be added to certificates.
 	ExtraSANs []string `json:"extra-sans,omitempty" yaml:"extra-sans,omitempty"`
 
+	// ControlPlaneEndpoint, when set, provides a single durable endpoint that external clients
+	// use to reach the kube-apiserver, load-balanced across all healthy control-plane nodes.
+	// Its host is always added to the kube-apiserver serving-certificate SANs, and for backend
+	// "service" it is fronted by an in-cluster LoadBalancer Service.
+	ControlPlaneEndpoint *ControlPlaneEndpoint `json:"control-plane-endpoint,omitempty" yaml:"control-plane-endpoint,omitempty"`
+
 	// Seed configuration for external certificates (cluster-wide)
 
 	// The CA certificate to be used for Kubernetes services.
@@ -261,3 +267,15 @@ func (b *BootstrapConfig) GetKubeletKey() string        { return util.Deref(b.Ku
 func (b *BootstrapConfig) GetKubeletClientCert() string { return util.Deref(b.KubeletClientCert) }
 func (b *BootstrapConfig) GetKubeletClientKey() string  { return util.Deref(b.KubeletClientKey) }
 func (b *BootstrapConfig) GetDisableSystemTuning() bool { return util.Deref(b.DisableSystemTuning) }
+
+// ControlPlaneEndpoint describes a single, durable endpoint that external clients use to reach
+// the kube-apiserver, load-balanced across all healthy control-plane nodes.
+type ControlPlaneEndpoint struct {
+	// Host is the IP or DNS name external clients will dial. Mandatory if the field is set.
+	Host string `json:"host" yaml:"host"`
+	// Port is the port external clients connect to. If omitted, defaults to the kube-apiserver
+	// secure port (6443).
+	Port int `json:"port,omitempty" yaml:"port,omitempty"`
+	// Backend selects how the endpoint is realised. One of "external" (default) or "service".
+	Backend string `json:"backend,omitempty" yaml:"backend,omitempty"`
+}
