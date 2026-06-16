@@ -4,6 +4,7 @@ package api
 type ClusterStatus struct {
 	// Ready is true if at least one node in the cluster is in READY state.
 	Ready     bool                    `json:"ready,omitempty"`
+	Status    ClusterHealth           `json:"status,omitempty"`
 	Members   []NodeStatus            `json:"members,omitempty"`
 	Config    UserFacingClusterConfig `json:"config,omitempty"`
 	Datastore Datastore               `json:"datastore,omitempty"`
