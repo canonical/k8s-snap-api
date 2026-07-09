@@ -1,4 +1,3 @@
-// Version: v2.2.0
 module github.com/canonical/k8s-snap-api/v2
 
 go 1.25.0
