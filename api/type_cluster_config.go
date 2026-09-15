@@ -146,6 +146,11 @@ type NetworkConfig struct {
 	// When network is enabled, this is implicitly false.
 	// If omitted defaults to `true`.
 	KubeProxyEnabled *bool `json:"kube-proxy-enabled" yaml:"kube-proxy-enabled"`
+	// Patches is a list of Kustomize-style patches applied to the rendered
+	// network feature manifests before they are installed/upgraded.
+	//
+	// Patches cannot target resources managed by a Helm lifecycle hook.
+	Patches *[]Patch `json:"patches,omitempty" yaml:"patches,omitempty"`
 }
 
 func (c NetworkConfig) GetEnabled() bool { return util.Deref(c.Enabled) }
@@ -155,6 +160,7 @@ func (c NetworkConfig) GetKubeProxyEnabled() bool {
 	}
 	return util.Deref(c.KubeProxyEnabled)
 }
+func (c NetworkConfig) GetPatches() []Patch { return util.Deref(c.Patches) }
 
 type GatewayConfig struct {
 	// Determines if the feature should be enabled.
