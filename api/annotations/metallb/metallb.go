@@ -7,8 +7,8 @@ const (
 	// MetalLB BGP mode. Each item may include: peerAddress (required), peerASN (required),
 	// myASN (optional, falls back to load-balancer.bgp-local-asn), peerPort (optional,
 	// default 179), nodeSelector (optional, map[string]string of matchLabels), bfdProfile
-	// (optional, name of a user-created BFDProfile; requires AnnotationBGPBackend to be
-	// set to "frr-k8s").
+	// (optional, name of a BFDProfile, e.g. one declared in AnnotationBFDProfiles;
+	// requires AnnotationBGPBackend to be set to "frr-k8s").
 	//
 	// Example value:
 	//   - peerAddress: 10.116.3.164
@@ -33,4 +33,23 @@ const (
 	//     any peer that sets a bfdProfile in AnnotationBGPPeers.
 	// Any other value causes the load-balancer feature to enter a degraded state.
 	AnnotationBGPBackend = "k8sd/v1alpha1/metallb/bgp-backend"
+
+	// AnnotationBFDProfiles holds a YAML-encoded list of MetalLB BFDProfile objects
+	// that k8sd keeps present while the load-balancer feature is enabled. Each item
+	// has: name (required), namespace (optional, defaults to the MetalLB namespace,
+	// which is the only one MetalLB watches), and spec (optional, a MetalLB
+	// BFDProfile spec, e.g. receiveInterval, transmitInterval, detectMultiplier,
+	// echoInterval, echoMode, passiveMode, minimumTtl). Requires AnnotationBGPBackend
+	// to be set to "frr-k8s".
+	//
+	// Example value:
+	//   - name: fast-failover
+	//     namespace: metallb-system
+	//     spec:
+	//       receiveInterval: 150
+	//       transmitInterval: 150
+	//       detectMultiplier: 3
+	//
+	// Invalid YAML causes the load-balancer feature to enter a degraded state.
+	AnnotationBFDProfiles = "k8sd/v1alpha1/metallb/bfd-profiles"
 )
