@@ -34,21 +34,24 @@ const (
 	// Any other value causes the load-balancer feature to enter a degraded state.
 	AnnotationBGPBackend = "k8sd/v1alpha1/metallb/bgp-backend"
 
-	// AnnotationBFDProfiles holds a YAML-encoded list of MetalLB BFDProfile objects
-	// that k8sd keeps present while the load-balancer feature is enabled. Each item
-	// has: name (required), namespace (optional, defaults to the MetalLB namespace,
-	// which is the only one MetalLB watches), and spec (optional, a MetalLB
-	// BFDProfile spec, e.g. receiveInterval, transmitInterval, detectMultiplier,
-	// echoInterval, echoMode, passiveMode, minimumTtl). Requires AnnotationBGPBackend
-	// to be set to "frr-k8s".
+	// AnnotationBFDProfiles holds a YAML-encoded list of MetalLB BFDProfile configs
+	// that k8sd keeps present in the MetalLB namespace while the load-balancer feature
+	// is enabled in BGP mode. Each item may include: name (required), receiveInterval
+	// (optional, ms, [10, 60000]), transmitInterval (optional, ms, [10, 60000]),
+	// detectMultiplier (optional, [2, 255]), echoInterval (optional, ms, [10, 60000]),
+	// echoMode (optional, bool), passiveMode (optional, bool), minimumTtl (optional,
+	// multi-hop only, [1, 254]). Unset fields fall back to MetalLB defaults. Requires
+	// AnnotationBGPBackend to be set to "frr-k8s".
 	//
 	// Example value:
 	//   - name: fast-failover
-	//     namespace: metallb-system
-	//     spec:
-	//       receiveInterval: 150
-	//       transmitInterval: 150
-	//       detectMultiplier: 3
+	//     receiveInterval: 150
+	//     transmitInterval: 150
+	//     detectMultiplier: 3
+	//     echoInterval: 50
+	//     echoMode: false
+	//     passiveMode: false
+	//     minimumTtl: 254
 	//
 	// Invalid YAML causes the load-balancer feature to enter a degraded state.
 	AnnotationBFDProfiles = "k8sd/v1alpha1/metallb/bfd-profiles"
