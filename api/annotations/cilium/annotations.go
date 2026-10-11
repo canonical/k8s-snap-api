@@ -41,4 +41,19 @@ const (
 	// the issues.
 	// e.g., k8sd/v1alpha1/cilium/tunnel-port="8472"
 	AnnotationTunnelPort = "k8sd/v1alpha1/cilium/tunnel-port"
+
+	// Unique ID of the cluster. Must be unique across all connected
+	// clusters and in the range of 1 to 255. Only required for Cluster
+	// Mesh, may be 0 if Cluster Mesh is not used.
+	// e.g., k8sd/v1alpha1/cilium/cluster-id="1"
+	AnnotationClusterID = "k8sd/v1alpha1/cilium/cluster-id"
+
+	// Name of the cluster. Only required for Cluster Mesh and mutual
+	// authentication with SPIRE. It must contain at most 32 characters,
+	// begin and end with a lower case alphanumeric character and may
+	// contain lower case alphanumeric characters and dashes between.
+	// The "default" name cannot be used if the Cluster ID is different
+	// from 0.
+	// e.g., k8sd/v1alpha1/cilium/cluster-name="my-cluster"
+	AnnotationClusterName = "k8sd/v1alpha1/cilium/cluster-name"
 )
