@@ -27,7 +27,7 @@ const (
 
 	// AnnotationBGPBackend selects the BGP implementation used by the MetalLB speaker.
 	// Supported values:
-	//   - "native" (default when unset): the built-in Go (GoBGP) implementation. Does
+	//   - "native" (default when unset): MetalLB's built-in BGP implementation. Does
 	//     not support BFD.
 	//   - "frr-k8s": the FRR-based backend (github.com/metallb/frr-k8s). Required for
 	//     any peer that sets a bfdProfile in AnnotationBGPPeers.
@@ -36,11 +36,12 @@ const (
 
 	// AnnotationBFDProfiles holds a YAML-encoded list of MetalLB BFDProfile configs
 	// that k8sd keeps present in the MetalLB namespace while the load-balancer feature
-	// is enabled in BGP mode. Each item may include: name (required), receiveInterval
-	// (optional, ms, [10, 60000]), transmitInterval (optional, ms, [10, 60000]),
-	// detectMultiplier (optional, [2, 255]), echoInterval (optional, ms, [10, 60000]),
-	// echoMode (optional, bool), passiveMode (optional, bool), minimumTtl (optional,
-	// multi-hop only, [1, 254]). Unset fields fall back to MetalLB defaults. Requires
+	// is enabled in BGP mode. Each item may include: name (required, unique, a DNS-1123
+	// subdomain), receiveInterval (optional, ms, [10, 60000]), transmitInterval
+	// (optional, ms, [10, 60000]), detectMultiplier (optional, [2, 255]), echoInterval
+	// (optional, ms, [10, 60000]), echoMode (optional, bool), passiveMode (optional,
+	// bool), minimumTtl (optional, multi-hop only, [1, 254]). Unknown fields are
+	// rejected. Unset fields fall back to MetalLB defaults. Requires
 	// AnnotationBGPBackend to be set to "frr-k8s".
 	//
 	// Example value:
