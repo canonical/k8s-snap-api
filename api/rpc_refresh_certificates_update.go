@@ -21,8 +21,18 @@ type RefreshCertificatesUpdateRequest struct {
 	// The admin client key to be used for Kubernetes services.
 	AdminClientKey *string `json:"admin-client-key,omitempty" yaml:"admin-client-key,omitempty"`
 	// The client certificate to be used for the kube-proxy.
+	//
+	// Deprecated: As of Canonical Kubernetes 1.36, this field is not used with the
+	// default CNI (Cilium), which uses kube-proxy replacement instead of kube-proxy.
+	// It remains accepted for backward compatibility and is used when the default
+	// CNI is not used.
 	KubeProxyClientCert *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
 	// The client key to be used for the kube-proxy.
+	//
+	// Deprecated: As of Canonical Kubernetes 1.36, this field is not used with the
+	// default CNI (Cilium), which uses kube-proxy replacement instead of kube-proxy.
+	// It remains accepted for backward compatibility and is used when the default
+	// CNI is not used.
 	KubeProxyClientKey *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
 	// The client certificate to be used for the kube-scheduler.
 	KubeSchedulerClientCert *string `json:"kube-scheduler-client-crt,omitempty" yaml:"kube-scheduler-client-crt,omitempty"`
