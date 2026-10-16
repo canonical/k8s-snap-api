@@ -26,15 +26,17 @@ type ControlPlaneJoinConfig struct {
 	// If omitted defaults to an auto generated certificate.
 	//
 	// Deprecated: As of Canonical Kubernetes 1.36, this field is not used with the
-	// default CNI (Cilium), which replaces kube-proxy. It remains
-	// accepted for backward compatibility and is used when another CNI is selected.
+	// default CNI (Cilium), which uses kube-proxy replacement instead of kube-proxy.
+	// It remains accepted for backward compatibility and is used when the default
+	// CNI is not used.
 	KubeProxyClientCert *string `json:"kube-proxy-client-crt,omitempty" yaml:"kube-proxy-client-crt,omitempty"`
 	// The client key to be used by kubelet for communicating with the kube-apiserver.
 	// If omitted defaults to an auto generated key.
 	//
 	// Deprecated: As of Canonical Kubernetes 1.36, this field is not used with the
-	// default CNI (Cilium), which replaces kube-proxy. It remains
-	// accepted for backward compatibility and is used when another CNI is selected.
+	// default CNI (Cilium), which uses kube-proxy replacement instead of kube-proxy.
+	// It remains accepted for backward compatibility and is used when the default
+	// CNI is not used.
 	KubeProxyClientKey *string `json:"kube-proxy-client-key,omitempty" yaml:"kube-proxy-client-key,omitempty"`
 	// The client certificate to be used for the kube-scheduler.
 	// If omitted defaults to an auto generated certificate.
@@ -107,8 +109,9 @@ type ControlPlaneJoinConfig struct {
 	// The format is `map[<--flag-name>]<value>`.
 	//
 	// Deprecated: As of Canonical Kubernetes 1.36, this field is not used with the
-	// default CNI (Cilium), which replaces kube-proxy. It remains
-	// accepted for backward compatibility and is used when another CNI is selected.
+	// default CNI (Cilium), which uses kube-proxy replacement instead of kube-proxy.
+	// It remains accepted for backward compatibility and is used when the default
+	// CNI is not used.
 	ExtraNodeKubeProxyArgs map[string]*string `json:"extra-node-kube-proxy-args,omitempty" yaml:"extra-node-kube-proxy-args,omitempty"`
 	// Additional arguments that are passed to the `kubelet` only for that specific node.
 	// A parameter that is explicitly set to `null` is deleted.
