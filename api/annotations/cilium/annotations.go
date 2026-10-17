@@ -41,4 +41,13 @@ const (
 	// the issues.
 	// e.g., k8sd/v1alpha1/cilium/tunnel-port="8472"
 	AnnotationTunnelPort = "k8sd/v1alpha1/cilium/tunnel-port"
+
+	// Restrict Cilium socket-level load balancing to the host network namespace.
+	// When set to "true", connect()/sendmsg() calls from non-host namespaces
+	// (e.g. LXD containers bridged onto the node's network) are not rewritten
+	// to backend pod IPs, and service traffic from them is load-balanced per
+	// packet instead. Pods also fall back to per-packet load balancing.
+	// Accepts "true" or "false"; if unset, defaults to "false".
+	// e.g. k8sd/v1alpha1/cilium/socket-lb/host-namespace-only="true"
+	AnnotationSocketLBHostNamespaceOnly = "k8sd/v1alpha1/cilium/socket-lb/host-namespace-only"
 )
